@@ -1,23 +1,31 @@
 #include<stdio.h>
-#include<math.h>
-void input(float *x1, float *y1, float *x2, float *y2)
+void input(int*num1, int*den1, int*num2, int*den2)
 {
-  printf("enter the values\n");
-  scanf("%f%f%f%f",x1,y1,x2,y2);
+ printf("enter the values");
+ scanf("%d%d%d%d",num1,den1,num2,den2);
+ }
+void add(int num1,int den1,int num2,int den2,int*num3,int*den3)
+{
+int gcd, c, x, y;
+  x=(num1*den2)+(num2*den1);
+  y=(den1*den2);
+  for(c=1; c<=x && c<=y; ++c)
+    {
+       if(x%c==0 && y%c==0)
+          gcd=c;
+    }
+  *num3=x/gcd;
+  *den3=y/gcd;
 }
-void find_distance(float x1, float y1, float x2, float y2, float *area)
+void output(int num1,int den1,int num2,int den2,int num3,int den3)
 {
-  *area=sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1));
-}
-void output(float x1, float y1,float x2, float y2, float area)
-{
-  printf("the distance between point (%f,%f) and (%f,%f) is with %f",x1,y1,x2,y2,area);
+  printf("%d/%d + %d/%d = %d/%d",num1,den1,num2,den2,num3,den3);
 }
 int main()
 {
-  float x1,x2,y1,y2,area;
-  input(&x1,&y1,&x2,&y2);
-  find_distance(x1,y1,x2,y2,&area);
-  output(x1,y1,x2,y2,area);
+  int num1,den1,num2,den2,num3,den3;
+  input(&num1,&den1,&num2,&den2);
+  add(num1,den1,num2,den2,&num3,&den3);
+  output(num1,den1,num2,den2,num3,den3);
   return 0;
 }
